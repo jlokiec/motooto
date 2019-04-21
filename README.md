@@ -1,4 +1,6 @@
-# motooto
+# motooto  
+master: [![Build Status](https://travis-ci.com/jlokiec/motooto.svg?branch=master)](https://travis-ci.com/jlokiec/motooto)  
+develop: [![Build Status](https://travis-ci.com/jlokiec/motooto.svg?branch=develop)](https://travis-ci.com/jlokiec/motooto)
 
 ### Database configuration
 database name: motooto  
