@@ -5,6 +5,14 @@
     <title>Motooto - rejestracja</title>
 </head>
 <body>
+<h1>Motooto.pl</h1>
+<menu>
+    <a href="/register">Rejestracja</a>
+    <a href="/login">Logowanie</a>
+    <a href="/add_advert">Dodaj ogłoszenie</a>
+    <a href="/search">Szukaj</a>
+    <a href="/logout">Wyloguj</a>
+</menu>
 <form th:action="@{/register}" th:object="${userDto}" method="post">
     <div>
         <label>Nazwa użytkownika: <input type="text" name="username"/></label>
