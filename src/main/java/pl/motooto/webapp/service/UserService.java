@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.motooto.webapp.dao.UserDao;
-import pl.motooto.webapp.service.exception.EmailTakenException;
-import pl.motooto.webapp.service.exception.UsernameTakenException;
 import pl.motooto.webapp.model.User;
 import pl.motooto.webapp.model.dto.UserDto;
+import pl.motooto.webapp.service.exception.EmailTakenException;
+import pl.motooto.webapp.service.exception.PasswordsDontMatchException;
+import pl.motooto.webapp.service.exception.UsernameTakenException;
 
 @Service
 public class UserService {
@@ -18,14 +19,17 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public User registerNewUser(UserDto userDto) throws UsernameTakenException, EmailTakenException {
+    public User registerNewUser(UserDto userDto) throws UsernameTakenException, EmailTakenException, PasswordsDontMatchException {
         User user = null;
 
-        if (usernameTaken(userDto.getUsername())) {
+        if (checkUsernameTaken(userDto)) {
             throw new UsernameTakenException();
         }
-        if (emailTaken(userDto.getEmail())) {
+        if (checkEmailTaken(userDto)) {
             throw new EmailTakenException();
+        }
+        if (!checkPasswordMatch(userDto)) {
+            throw new PasswordsDontMatchException();
         }
 
         user = new User();
@@ -41,13 +45,20 @@ public class UserService {
         return user;
     }
 
-    private boolean usernameTaken(String username) {
-        User user = userDao.findByUsername(username);
+    private boolean checkUsernameTaken(UserDto userDto) {
+        User user = userDao.findByUsername(userDto.getUsername());
         return user != null;
     }
 
-    private boolean emailTaken(String email) {
-        User user = userDao.findByEmail(email);
+    private boolean checkEmailTaken(UserDto userDto) {
+        User user = userDao.findByEmail(userDto.getEmail());
         return user != null;
+    }
+
+    private boolean checkPasswordMatch(UserDto userDto) {
+        String password = userDto.getPassword();
+        String passwordRepeat = userDto.getPasswordRepeat();
+
+        return password.equals(passwordRepeat);
     }
 }
