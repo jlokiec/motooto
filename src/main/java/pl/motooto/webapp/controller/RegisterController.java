@@ -4,18 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.motooto.webapp.service.exception.EmailTakenException;
-import pl.motooto.webapp.service.exception.UsernameTakenException;
+import org.springframework.web.servlet.view.RedirectView;
 import pl.motooto.webapp.model.dto.UserDto;
 import pl.motooto.webapp.service.UserService;
+import pl.motooto.webapp.service.exception.EmailTakenException;
+import pl.motooto.webapp.service.exception.PasswordsDontMatchException;
+import pl.motooto.webapp.service.exception.UsernameTakenException;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 public class RegisterController {
@@ -35,28 +34,24 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute(USER_DTO) UserDto userDto, BindingResult result, Model model) {
+    public RedirectView register(@Valid @ModelAttribute(USER_DTO) UserDto userDto, BindingResult result, Model model) {
+        RedirectView redirectView = new RedirectView();
+
         if (result.hasErrors()) {
-            List<ObjectError> errors = result.getAllErrors();
-
-            for (ObjectError error : errors) {
-                if (error instanceof FieldError) {
-                    FieldError fieldError = (FieldError) error;
-                }
-            }
-
-            System.out.println("Some errors");
+            redirectView.setUrl("/register_fail");
+            return redirectView;
         }
 
         try {
             userService.registerNewUser(userDto);
-        } catch (UsernameTakenException e) {
-            System.out.println("username taken");
-            return "/register_fail";
-        } catch (EmailTakenException e) {
-            return "/register_fail";
+        } catch (UsernameTakenException | EmailTakenException | PasswordsDontMatchException e) {
+            redirectView.setUrl("/register_fail");
+            return redirectView;
         }
 
-        return "/register_success";
+        redirectView.addStaticAttribute("registeredName", userDto.getFirstName());
+        redirectView.setUrl("/register_success");
+
+        return redirectView;
     }
 }
