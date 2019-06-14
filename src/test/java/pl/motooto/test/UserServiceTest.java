@@ -9,6 +9,7 @@ import pl.motooto.webapp.model.User;
 import pl.motooto.webapp.model.dto.UserDto;
 import pl.motooto.webapp.service.UserService;
 import pl.motooto.webapp.service.exception.EmailTakenException;
+import pl.motooto.webapp.service.exception.PasswordsDontMatchException;
 import pl.motooto.webapp.service.exception.UsernameTakenException;
 
 import static org.mockito.Mockito.mock;
@@ -24,6 +25,7 @@ public class UserServiceTest {
     private static UserService service;
     private static UserDto userWithTakenUsername;
     private static UserDto userWithTakenEmail;
+    private static UserDto userWithNotMatchingPasswords;
     private static UserDto userThatShouldRegister;
 
     @BeforeClass
@@ -41,17 +43,22 @@ public class UserServiceTest {
     }
 
     @Test(expected = UsernameTakenException.class)
-    public void testRegisterNewUserUsernameTaken() throws EmailTakenException, UsernameTakenException {
+    public void testRegisterNewUserUsernameTaken() throws EmailTakenException, UsernameTakenException, PasswordsDontMatchException {
         service.registerNewUser(userWithTakenUsername);
     }
 
     @Test(expected = EmailTakenException.class)
-    public void testRegisterNewUserEmailTaken() throws EmailTakenException, UsernameTakenException {
+    public void testRegisterNewUserEmailTaken() throws EmailTakenException, UsernameTakenException, PasswordsDontMatchException {
         service.registerNewUser(userWithTakenEmail);
     }
 
+    @Test(expected = PasswordsDontMatchException.class)
+    public void testRegisterNewUserPasswordsDontMatch() throws PasswordsDontMatchException, UsernameTakenException, EmailTakenException {
+        service.registerNewUser(userWithNotMatchingPasswords);
+    }
+
     @Test
-    public void testRegisterNewUserShouldPass() throws EmailTakenException, UsernameTakenException {
+    public void testRegisterNewUserShouldPass() throws EmailTakenException, UsernameTakenException, PasswordsDontMatchException {
         service.registerNewUser(userThatShouldRegister);
     }
 
@@ -71,6 +78,14 @@ public class UserServiceTest {
         userWithTakenUsername.setLastName("Smith");
         userWithTakenUsername.setPassword("password");
         userWithTakenUsername.setPasswordRepeat("password");
+
+        userWithNotMatchingPasswords = new UserDto();
+        userWithNotMatchingPasswords.setUsername(USERNAME_NOT_TAKEN);
+        userWithNotMatchingPasswords.setEmail(EMAIL_NOT_TAKEN);
+        userWithNotMatchingPasswords.setFirstName("John");
+        userWithNotMatchingPasswords.setLastName("Smith");
+        userWithNotMatchingPasswords.setPassword("password");
+        userWithNotMatchingPasswords.setPasswordRepeat("password1");
 
         userThatShouldRegister = new UserDto();
         userThatShouldRegister.setUsername(USERNAME_NOT_TAKEN);
