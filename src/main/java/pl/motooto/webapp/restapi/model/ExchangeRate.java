@@ -26,4 +26,10 @@ public class ExchangeRate {
         rateDate = parsedDate;
         rateValue = currencyExchangeRate.getRateValue();
     }
+
+    public ExchangeRate(String currencyCode, Date rateDate, double rateValue) {
+        this.currencyCode = currencyCode;
+        this.rateDate = rateDate;
+        this.rateValue = rateValue;
+    }
 }
