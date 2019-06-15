@@ -37,9 +37,7 @@ public class AddAdvertisementController {
         try {
             addAdvertisementService.addNewAdvertisement(addAdvertisementDto);
         } catch (Exception e) {
-            System.out.println(e.toString());
-
-            redirectView.setUrl("/add_advert");
+            redirectView.setUrl("/add_advert_fail");
             return redirectView;
         }
 
