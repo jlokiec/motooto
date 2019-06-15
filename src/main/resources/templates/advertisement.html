@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Motooto - ogłoszenie</title>
+</head>
+<body>
+<h1>Motooto.pl</h1>
+<menu>
+    <a href="/">Strona główna</a>
+    <a href="/register">Rejestracja</a>
+    <a href="/login">Logowanie</a>
+    <a href="/add_advert">Dodaj ogłoszenie</a>
+    <a href="/search">Szukaj</a>
+    <a href="/logout">Wyloguj</a>
+</menu>
+<p>Treść ogłoszenia o id = <span th:text="${advertisement}"/></p>
+</body>
+</html>
