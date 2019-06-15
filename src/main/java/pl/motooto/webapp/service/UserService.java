@@ -8,6 +8,7 @@ import pl.motooto.webapp.model.User;
 import pl.motooto.webapp.model.dto.UserDto;
 import pl.motooto.webapp.service.exception.EmailTakenException;
 import pl.motooto.webapp.service.exception.PasswordsDontMatchException;
+import pl.motooto.webapp.service.exception.UserNotFoundException;
 import pl.motooto.webapp.service.exception.UsernameTakenException;
 
 @Service
@@ -41,6 +42,16 @@ public class UserService {
         user.setEnabled(true);
 
         userDao.save(user);
+
+        return user;
+    }
+
+    public User getUser(String username) throws UserNotFoundException {
+        User user = userDao.findByUsername(username);
+
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
 
         return user;
     }

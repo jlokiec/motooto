@@ -10,6 +10,7 @@ import pl.motooto.webapp.model.dto.UserDto;
 import pl.motooto.webapp.service.UserService;
 import pl.motooto.webapp.service.exception.EmailTakenException;
 import pl.motooto.webapp.service.exception.PasswordsDontMatchException;
+import pl.motooto.webapp.service.exception.UserNotFoundException;
 import pl.motooto.webapp.service.exception.UsernameTakenException;
 
 import static org.mockito.Mockito.mock;
@@ -60,6 +61,16 @@ public class UserServiceTest {
     @Test
     public void testRegisterNewUserShouldPass() throws EmailTakenException, UsernameTakenException, PasswordsDontMatchException {
         service.registerNewUser(userThatShouldRegister);
+    }
+
+    @Test
+    public void testGetUserExistingUsername() throws UserNotFoundException {
+        service.getUser(USERNAME_TAKEN);
+    }
+
+    @Test(expected = UserNotFoundException.class)
+    public void testGetUserInvalidUsername() throws UserNotFoundException {
+        service.getUser(USERNAME_NOT_TAKEN);
     }
 
     private static void setupUsers() {
