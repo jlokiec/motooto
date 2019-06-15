@@ -29,4 +29,7 @@ public class User {
     private String lastName;
 
     private boolean enabled;
+
+    @OneToMany(mappedBy = "publisher")
+    private List<Advertisement> advertisements;
 }
