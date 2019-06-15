@@ -14,6 +14,8 @@ import pl.motooto.webapp.service.NbpCurrencyService;
 import pl.motooto.webapp.service.exception.InvalidCurrencyCodeException;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -25,7 +27,6 @@ public class AdvertisementConverterServiceTest {
     private static final String AD_TITLE = "Sprzedam Opla!";
     private static final String USERNAME = "johnsmith";
     private static final long MODIFICATION_TIMESTAMP = 1559403503000L;
-    private static final String EXPECTED_DATE = "01.06.2019 17:38";
     private static final double PRICE = 12345.67;
     private static final String CAR_MAKE = "Opel";
     private static final String CAR_MODEL = "Kadett";
@@ -71,31 +72,34 @@ public class AdvertisementConverterServiceTest {
     @Test
     public void testConvertAdvertisementLastModificationDate() {
         AdvertisementPresentationDto ad = service.convertAdvertisement(advertisement);
-        assertEquals(EXPECTED_DATE, ad.getLastModificationDate());
+        Date modificationDate = new Date(MODIFICATION_TIMESTAMP);
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        String expectedDate = dateFormat.format(modificationDate);
+        assertEquals(expectedDate, ad.getLastModificationDate());
     }
 
     @Test
     public void testConvertAdvertisementPriceInPln() {
         AdvertisementPresentationDto ad = service.convertAdvertisement(advertisement);
-        assertEquals("12345,67", ad.getPriceInPln());
+        assertEquals(String.format("%.2f", 12345.67), ad.getPriceInPln());
     }
 
     @Test
     public void testConvertAdvertisementPriceInEur() {
         AdvertisementPresentationDto ad = service.convertAdvertisement(advertisement);
-        assertEquals("2887,47", ad.getPriceInEur());
+        assertEquals(String.format("%.2f", 2887.47), ad.getPriceInEur());
     }
 
     @Test
     public void testConvertAdvertisementPriceInUsd() {
         AdvertisementPresentationDto ad = service.convertAdvertisement(advertisement);
-        assertEquals("3295,43", ad.getPriceInUsd());
+        assertEquals(String.format("%.2f", 3295.43), ad.getPriceInUsd());
     }
 
     @Test
     public void testConvertAdvertisementPriceInGbp() {
         AdvertisementPresentationDto ad = service.convertAdvertisement(advertisement);
-        assertEquals("2293,28", ad.getPriceInGbp());
+        assertEquals(String.format("%.2f", 2293.28), ad.getPriceInGbp());
     }
 
     @Test
