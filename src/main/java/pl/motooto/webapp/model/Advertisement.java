@@ -46,4 +46,8 @@ public class Advertisement {
     @Getter
     @Setter
     private String description;
+
+    @Getter
+    @Setter
+    private String phoneNumber;
 }
