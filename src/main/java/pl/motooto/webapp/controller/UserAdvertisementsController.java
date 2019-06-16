@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.motooto.webapp.model.dto.UserAdvertisementDto;
+import pl.motooto.webapp.model.dto.UserAdvertisementsDto;
 import pl.motooto.webapp.service.UserAdvertisementsService;
 import pl.motooto.webapp.service.exception.UserNotLoggedInException;
 
@@ -19,7 +19,7 @@ public class UserAdvertisementsController {
 
     @GetMapping("/user_advertisements")
     public String initializeView(Model model) throws UserNotLoggedInException {
-        UserAdvertisementDto userAdvertisementDto = null;
+        UserAdvertisementsDto userAdvertisementsDto = null;
 
         try {
             model.addAttribute("advertisements", userAdvertisementsService.getUserAdvertisements());
