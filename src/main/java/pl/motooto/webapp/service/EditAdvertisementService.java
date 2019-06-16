@@ -32,6 +32,7 @@ public class EditAdvertisementService {
 
         advertisement.setTitle(editAdvertisementDto.getTitle());
         advertisement.setDescription(editAdvertisementDto.getDescription());
+        advertisement.setPhoneNumber(editAdvertisementDto.getPhoneNumber());
         advertisement.setPrice(editAdvertisementDto.getPrice());
 
         carDetails.setMake(editAdvertisementDto.getCarMake());
