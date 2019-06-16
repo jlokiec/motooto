@@ -46,7 +46,7 @@
             <label>Ilość kuca: <input type="text" th:value="${editAdvertisementDto.horsePower}" name="horsePower"/></label>
         </div>
         <div>
-            <label>Bity: <input type="checkbox" name="damaged"/></label>
+            <label>Bity: <input type="checkbox" th:checked="${editAdvertisementDto.damaged}" name="damaged"/></label>
         </div>
     </div>
     <div>
