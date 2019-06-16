@@ -33,6 +33,7 @@ public class AddAdvertisementService {
 
         advertisement.setTitle(addAdvertisementDto.getTitle());
         advertisement.setDescription(addAdvertisementDto.getDescription());
+        advertisement.setPhoneNumber(addAdvertisementDto.getPhoneNumber());
         advertisement.setPrice(addAdvertisementDto.getPrice());
 
         carDetails.setMake(addAdvertisementDto.getCarMake());
