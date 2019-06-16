@@ -23,6 +23,9 @@
             <label>Opis: <input type="text" th:value="${editAdvertisementDto.description}" name="description"/></label>
         </div>
         <div>
+            <label>Telefon: <input type="text" th:value="${editAdvertisementDto.phoneNumber}" name="phoneNumber"/></label>
+        </div>
+        <div>
             <label>Cena: <input type="text" th:value="${editAdvertisementDto.price}" name="price"/></label>
         </div>
     </div>
@@ -43,7 +46,7 @@
             <label>Ilość kuca: <input type="text" th:value="${editAdvertisementDto.horsePower}" name="horsePower"/></label>
         </div>
         <div>
-            <label>Bity: <input type="checkbox" th:value="${editAdvertisementDto.damaged}" name="damaged"/></label>
+            <label>Bity: <input type="checkbox" name="damaged"/></label>
         </div>
     </div>
     <div>
