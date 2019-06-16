@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Motooto - dodawanie ogłoszeń</title>
 </head>
@@ -13,6 +13,41 @@
     <a href="/search">Szukaj</a>
     <a href="/logout">Wyloguj</a>
 </menu>
-<p>Dodawanie ogłoszeń.</p>
+<form th:action="@{/add_advert}" th:object="${addAdvertisementDto}" method="post">
+    <div>
+        <div>
+            <label>Tytuł: <input type="text" name="title"/></label>
+        </div>
+        <div>
+            <label>Opis: <input type="text" name="description"/></label>
+        </div>
+        <div>
+            <label>Cena: <input type="text" name="price"/></label>
+        </div>
+    </div>
+    <div>
+        <div>
+            <label>Marka: <input type="text" name="carMake"/></label>
+        </div>
+        <div>
+            <label>Model: <input type="text" name="carModel"/></label>
+        </div>
+        <div>
+            <label>Rok produkcji: <input type="text" name="productionYear"/></label>
+        </div>
+        <div>
+            <label>Pojemność silnika: <input type="text" name="engineDisplacement"/></label>
+        </div>
+        <div>
+            <label>Ilość kuca: <input type="text" name="horsePower"/></label>
+        </div>
+        <div>
+            <label>Bity: <input type="checkbox" name="damaged"/></label>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Dodaj"/>
+    </div>
+</form>
 </body>
 </html>
