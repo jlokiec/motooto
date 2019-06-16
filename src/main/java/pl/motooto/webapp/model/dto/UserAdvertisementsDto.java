@@ -6,6 +6,6 @@ import pl.motooto.webapp.model.Advertisement;
 import java.util.List;
 
 @Data
-public class UserAdvertisementDto {
+public class UserAdvertisementsDto {
     List<Advertisement> advertisements;
 }
