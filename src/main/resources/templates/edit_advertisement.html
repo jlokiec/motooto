@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Motooto - edytowanie ogłoszenia</title>
+</head>
+<body>
+<h1>Motooto.pl</h1>
+<menu>
+    <a href="/">Strona główna</a>
+    <a href="/register">Rejestracja</a>
+    <a href="/login">Logowanie</a>
+    <a href="/add_advert">Dodaj ogłoszenie</a>
+    <a href="/search">Szukaj</a>
+    <a href="/logout">Wyloguj</a>
+</menu>
+<form th:action="@{/edit_advertisement}" th:object="${editAdvertisementDto}" method="post">
+    <div>
+        <div>
+            <label>Tytuł: <input type="text" th:value="${editAdvertisementDto.title}" name="title"/></label>
+        </div>
+        <div>
+            <label>Opis: <input type="text" th:value="${editAdvertisementDto.description}" name="description"/></label>
+        </div>
+        <div>
+            <label>Cena: <input type="text" th:value="${editAdvertisementDto.price}" name="price"/></label>
+        </div>
+    </div>
+    <div>
+        <div>
+            <label>Marka: <input type="text" th:value="${editAdvertisementDto.carMake}" name="carMake"/></label>
+        </div>
+        <div>
+            <label>Model: <input type="text" th:value="${editAdvertisementDto.carModel}" name="carModel"/></label>
+        </div>
+        <div>
+            <label>Rok produkcji: <input type="text" th:value="${editAdvertisementDto.productionYear}" name="productionYear"/></label>
+        </div>
+        <div>
+            <label>Pojemność silnika: <input type="text" th:value="${editAdvertisementDto.engineDisplacement}" name="engineDisplacement"/></label>
+        </div>
+        <div>
+            <label>Ilość kuca: <input type="text" th:value="${editAdvertisementDto.horsePower}" name="horsePower"/></label>
+        </div>
+        <div>
+            <label>Bity: <input type="checkbox" th:value="${editAdvertisementDto.damaged}" name="damaged"/></label>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Aktualizuj"/>
+    </div>
+</form>
+</body>
+</html>
