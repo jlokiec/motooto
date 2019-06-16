@@ -25,7 +25,7 @@ public class Advertisement {
     @Setter
     private User publisher;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Getter
     @Setter
     private CarDetails details;
