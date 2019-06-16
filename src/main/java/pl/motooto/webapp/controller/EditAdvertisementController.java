@@ -34,14 +34,10 @@ public class EditAdvertisementController {
     public String initializeView(@RequestParam long advertisementId, Model model) {
         this.advertisementId = advertisementId;
 
-        System.out.println(advertisementId);
-
         Advertisement advertisement = null;
 
         try {
             advertisement = advertisementService.getAdvertisement(advertisementId);
-
-            System.out.println(advertisement.getTitle());
         } catch (Exception e) {
             return "/user_advertisements";
         }
@@ -49,6 +45,7 @@ public class EditAdvertisementController {
         EditAdvertisementDto editAdvertisementDto = new EditAdvertisementDto();
         editAdvertisementDto.setTitle(advertisement.getTitle());
         editAdvertisementDto.setDescription(advertisement.getDescription());
+        editAdvertisementDto.setPhoneNumber(advertisement.getPhoneNumber());
         editAdvertisementDto.setPrice(advertisement.getPrice());
         editAdvertisementDto.setCarMake(advertisement.getDetails().getMake());
         editAdvertisementDto.setCarModel(advertisement.getDetails().getModel());

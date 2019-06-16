@@ -14,6 +14,9 @@ public class EditAdvertisementDto {
     @NotEmpty
     private String description;
 
+    @NotEmpty
+    private String phoneNumber;
+
     private double price;
 
     @NotEmpty
