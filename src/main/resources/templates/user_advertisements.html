@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Motooto - ogłoszenia użytkownika</title>
+</head>
+<body>
+<h1>Motooto.pl</h1>
+<menu>
+    <a href="/">Strona główna</a>
+    <a href="/register">Rejestracja</a>
+    <a href="/login">Logowanie</a>
+    <a href="/add_advert">Dodaj ogłoszenie</a>
+    <a href="/search">Szukaj</a>
+    <a href="/logout">Wyloguj</a>
+</menu>
+<table>
+    <thead>
+    <tr>
+        <th>Tytuł</th>
+        <th>Marka auta</th>
+        <th>Model auta</th>
+        <th>Cena</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${advertisements.empty}">
+        <td colspan="2">Brak ogłoszeń</td>
+    </tr>
+    <tr th:each="advertisement : ${advertisements}">
+        <td><span th:text="${advertisement.title}">Tytuł</span></td>
+        <td><span th:text="${advertisement.details.make}">Marka</span></td>
+        <td><span th:text="${advertisement.details.model}">Model</span></td>
+        <td><span th:text="${advertisement.price}">Cena</span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
