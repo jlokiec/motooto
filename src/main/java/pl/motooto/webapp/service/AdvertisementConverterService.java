@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.motooto.webapp.model.Advertisement;
 import pl.motooto.webapp.model.dto.AdvertisementPresentationDto;
+import pl.motooto.webapp.model.dto.AdvertisementPresentationDtoBuilder;
 import pl.motooto.webapp.restapi.model.ExchangeRate;
 import pl.motooto.webapp.service.exception.InvalidCurrencyCodeException;
 
@@ -28,55 +29,47 @@ public class AdvertisementConverterService {
     }
 
     public AdvertisementPresentationDto convertAdvertisement(Advertisement advertisement) {
-        AdvertisementPresentationDto convertedAdvertisement = new AdvertisementPresentationDto();
-
         String title = advertisement.getTitle();
-        convertedAdvertisement.setTitle(title);
-
         String username = advertisement.getPublisher().getUsername();
-        convertedAdvertisement.setUsername(username);
-
         long lastModificationTimestamp = advertisement.getLastModificationTimestamp();
         String lastModificationDate = convertTimestampToDateString(lastModificationTimestamp);
-        convertedAdvertisement.setLastModificationDate(lastModificationDate);
 
         double priceInPln = advertisement.getPrice();
         String priceInPlnString = formatDoubleToString(priceInPln);
-        convertedAdvertisement.setPriceInPln(priceInPlnString);
-
         String priceInEur = convertPriceToCurrency(priceInPln, EUR_CODE);
-        convertedAdvertisement.setPriceInEur(priceInEur);
-
         String priceInUsd = convertPriceToCurrency(priceInPln, USD_CODE);
-        convertedAdvertisement.setPriceInUsd(priceInUsd);
-
         String priceInGpb = convertPriceToCurrency(priceInPln, GBP_CODE);
-        convertedAdvertisement.setPriceInGbp(priceInGpb);
 
         String description = advertisement.getDescription();
-        convertedAdvertisement.setDescription(description);
-
         String carMake = advertisement.getDetails().getMake();
-        convertedAdvertisement.setCarMake(carMake);
-
         String carModel = advertisement.getDetails().getModel();
-        convertedAdvertisement.setCarModel(carModel);
-
         int productionYear = advertisement.getDetails().getProductionYear();
-        convertedAdvertisement.setProductionYear(productionYear);
-
         int engineDisplacement = advertisement.getDetails().getEngineDisplacement();
-        convertedAdvertisement.setEngineDisplacement(engineDisplacement);
 
         int horsePower = advertisement.getDetails().getHorsePower();
-        convertedAdvertisement.setHorsePower(horsePower);
 
         boolean carDamaged = advertisement.getDetails().isDamaged();
         String carStatus = convertCarStatus(carDamaged);
-        convertedAdvertisement.setCarStatus(carStatus);
 
         String phoneNumber = advertisement.getPhoneNumber();
-        convertedAdvertisement.setPhoneNumber(phoneNumber);
+
+        AdvertisementPresentationDto convertedAdvertisement = new AdvertisementPresentationDtoBuilder()
+                .setTitle(title)
+                .setUsername(username)
+                .setLastModificationDate(lastModificationDate)
+                .setPriceInPln(priceInPlnString)
+                .setPriceInEur(priceInEur)
+                .setPriceInUsd(priceInUsd)
+                .setPriceInGbp(priceInGpb)
+                .setDescription(description)
+                .setCarMake(carMake)
+                .setCarModel(carModel)
+                .setProductionYear(productionYear)
+                .setEngineDisplacement(engineDisplacement)
+                .setHorsePower(horsePower)
+                .setCarStatus(carStatus)
+                .setPhoneNumber(phoneNumber)
+                .build();
 
         return convertedAdvertisement;
     }
