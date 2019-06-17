@@ -8,21 +8,25 @@ import lombok.Data;
 @Data
 public class AddAdvertisementDto {
     @NotEmpty
-    @Size(max = 64)
+    @Size(min = 2, max = 64)
     private String title;
 
     @NotEmpty
+    @Size(min = 2, max = 64)
     private String description;
 
     @NotEmpty
+    @Size(min = 2, max = 16)
     private String phoneNumber;
 
     private double price;
 
     @NotEmpty
+    @Size(min = 2, max = 64)
     private String carMake;
 
     @NotEmpty
+    @Size(min = 2, max = 64)
     private String carModel;
 
     private int productionYear;
