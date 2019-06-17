@@ -28,32 +28,23 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public String initializeView(Model model) throws  SearchedFailedException {
+    public String initializeView(Model model) throws SearchedFailedException {
         model.addAttribute(SEARCH_DTO, new SearchDto());
         try {
             model.addAttribute("advertisements", searchService.getAll());
-        }
-        catch(SearchedFailedException e)
-        {
+        } catch (SearchedFailedException e) {
             throw new SearchedFailedException();
         }
         return "search";
     }
 
     @PostMapping("/search")
-    public RedirectView searchAdvertisments(@Valid @ModelAttribute(SEARCH_DTO) SearchDto searchDto, BindingResult result ,HttpServletRequest request, Model model) {
+    public RedirectView searchAdvertisments(@ModelAttribute(SEARCH_DTO) SearchDto searchDto, BindingResult result, HttpServletRequest request, Model model) {
         RedirectView redirectView = new RedirectView();
-
-        if(result.hasErrors()){
-            redirectView.setUrl("/validation_error");
-            return redirectView;
-        }
-        else {
-            HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("search_options", searchDto);
-            redirectView.setUrl("/search_result");
-            return redirectView;
-        }
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("search_options", searchDto);
+        redirectView.setUrl("/search_result");
+        return redirectView;
 
     }
 }
