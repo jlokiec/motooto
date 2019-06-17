@@ -9,9 +9,11 @@ import pl.motooto.webapp.restapi.model.ExchangeRate;
 import pl.motooto.webapp.service.exception.InvalidCurrencyCodeException;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.TimeZone;
 
 @Service
 public class AdvertisementConverterService {
@@ -75,11 +77,9 @@ public class AdvertisementConverterService {
     }
 
     private String convertTimestampToDateString(long timestamp) {
-        Date date = new Date(timestamp);
-        DateFormat dateFormat = new SimpleDateFormat(MODIFICATION_DATE_FORMAT);
-        String formattedDate = dateFormat.format(date);
-
-        return formattedDate;
+        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), TimeZone.getDefault().toZoneId());
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(MODIFICATION_DATE_FORMAT, Locale.getDefault());
+        return dateFormatter.format(date);
     }
 
     private String convertPriceToCurrency(double price, String currencyCode) {
