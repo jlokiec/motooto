@@ -8,10 +8,12 @@ import java.util.List;
 
 public interface SearchResultDao extends JpaRepository<Advertisement, Long> {
 
+    /*
     @Query("SELECT u FROM Advertisement u WHERE u.details.make = ?1 and u.details.model = ?2 and u.details.productionYear > ?3 and  u.details.productionYear < ?4 and u.price >= ?5  and u.price <  ?6 and u.details.damaged = ?7 ")
 
     List<Advertisement> findByMade(String made, String model,int year_beg , int year_end, double price_beg, double price_end, boolean damaged);
-
+    */
+    List<Advertisement> findAll();
 
 }
 

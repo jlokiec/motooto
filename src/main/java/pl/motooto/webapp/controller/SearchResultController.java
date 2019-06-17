@@ -27,13 +27,8 @@ public class SearchResultController {
         if(httpSession != null)
         {
             SearchDto dto = (SearchDto) httpSession.getAttribute("search_options");
-            try {
-                model.addAttribute("advertisements", searchResult.filter(dto));
-            }
-            catch(SearchedFailedException e)
-            {
-                throw new SearchedFailedException();
-            }
+            model.addAttribute("advertisements", searchResult.filter(dto));
+
         }
         return "search_result";
     }
