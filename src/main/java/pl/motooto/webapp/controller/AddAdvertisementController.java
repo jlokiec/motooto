@@ -34,6 +34,11 @@ public class AddAdvertisementController {
     public RedirectView addNewAdvertisement(@Valid @ModelAttribute(ADD_ADVERTISEMENT_DTO) AddAdvertisementDto addAdvertisementDto, BindingResult result, Model model) {
         RedirectView redirectView = new RedirectView();
 
+        if (result.hasErrors()) {
+            redirectView.setUrl("/add_advert_fail");
+            return redirectView;
+        }
+
         try {
             addAdvertisementService.addNewAdvertisement(addAdvertisementDto);
         } catch (Exception e) {
