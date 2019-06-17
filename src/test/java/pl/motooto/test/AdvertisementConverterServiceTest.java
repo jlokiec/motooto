@@ -14,9 +14,12 @@ import pl.motooto.webapp.service.NbpCurrencyService;
 import pl.motooto.webapp.service.exception.InvalidCurrencyCodeException;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -72,9 +75,11 @@ public class AdvertisementConverterServiceTest {
     @Test
     public void testConvertAdvertisementLastModificationDate() {
         AdvertisementPresentationDto ad = service.convertAdvertisement(advertisement);
-        Date modificationDate = new Date(MODIFICATION_TIMESTAMP);
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        String expectedDate = dateFormat.format(modificationDate);
+
+        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(MODIFICATION_TIMESTAMP), TimeZone.getDefault().toZoneId());
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", Locale.getDefault());
+        String expectedDate = dateFormatter.format(date);
+
         assertEquals(expectedDate, ad.getLastModificationDate());
     }
 

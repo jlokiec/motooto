@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class AddAdvertisementDto {
+public class EditAdvertisementDto {
     @NotEmpty
     @Size(max = 64)
     private String title;
