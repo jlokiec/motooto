@@ -10,39 +10,9 @@
     <a href="/register">Rejestracja</a>
     <a href="/login">Logowanie</a>
     <a href="/add_advert">Dodaj ogłoszenie</a>
-    <a href="/user_advertisements">Moje ogłoszenia</a>
     <a href="/search">Szukaj</a>
     <a href="/logout">Wyloguj</a>
 </menu>
-<p>Wyszukiwanie.</p>
-<form th:action="@{/search}" th:object="${searchDTO}" method="post">
-    <div>
-        <div>
-            <label>Marka: <input type="text" name="carMake"/></label>
-        </div>
-        <div>
-            <label>Model: <input type="text" name="carModel"/></label>
-        </div>
-        <div>
-            <label>Cena od: <input type="text" name="price_beg"/></label>
-        </div>
-        <div>
-            <label>Cena do: <input type="text" name="price_end"/></label>
-        </div>
-        <div>
-            <label>Rok produkcji od: <input type="text" name="productionYear_beg"/></label>
-        </div>
-        <div>
-            <label>Rok produkcji do: <input type="text" name="productionYear_end"/></label>
-        </div>
-        <div>
-            <label>Uszkodzony: <input type="checkbox" name="damaged"/></label>
-        </div>
-    </div>
-    <div>
-        <input type="submit" value="Wyszukaj"/>
-    </div>
-</form>
 <table>
     <thead>
     <tr>
