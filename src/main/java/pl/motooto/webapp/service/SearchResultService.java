@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.motooto.webapp.dao.SearchResultDao;
 import pl.motooto.webapp.model.Advertisement;
 import pl.motooto.webapp.model.dto.SearchDto;
-import pl.motooto.webapp.service.exception.SearchedFailedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class SearchResultService {
                 filtered = allAdvertisements.stream().filter(advertisement -> advertisement.getDetails().getModel().equals(model)).collect(Collectors.toList());
             }
         }
-        if(dto.getProductionYear_beg() != 0 && dto.getProductionYear_end() != 0){
+        if (dto.getProductionYear_beg() != 0 && dto.getProductionYear_end() != 0) {
             int year_beg = dto.getProductionYear_beg();
             int year_end = dto.getProductionYear_end();
             if (filtered.size() > 0) {
@@ -45,7 +44,7 @@ public class SearchResultService {
                 filtered = allAdvertisements.stream().filter(advertisement -> advertisement.getDetails().getProductionYear() >= year_beg && advertisement.getDetails().getProductionYear() <= year_end).collect(Collectors.toList());
             }
         }
-        if(dto.getPrice_beg() != 0 && dto.getPrice_end() != 0){
+        if (dto.getPrice_beg() != 0 && dto.getPrice_end() != 0) {
             double price_beg = dto.getPrice_beg();
             double price_end = dto.getPrice_end();
             if (filtered.size() > 0) {

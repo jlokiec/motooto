@@ -16,16 +16,14 @@ public class SearchResultController {
     private SearchResultService searchResult;
 
     @Autowired
-    SearchResultController(SearchResultService searchResult)
-    {
+    SearchResultController(SearchResultService searchResult) {
         this.searchResult = searchResult;
     }
 
     @GetMapping("/search_result")
     public String initializeView(Model model, HttpServletRequest request) throws SearchedFailedException {
         HttpSession httpSession = request.getSession(false);
-        if(httpSession != null)
-        {
+        if (httpSession != null) {
             SearchDto dto = (SearchDto) httpSession.getAttribute("search_options");
             model.addAttribute("advertisements", searchResult.filter(dto));
 

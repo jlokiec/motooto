@@ -7,5 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ValidationError {
 
     @GetMapping("/validation_error")
-    public String initializeView() { return "validation_error"; }
+    public String initializeView() {
+        return "validation_error";
+    }
 }

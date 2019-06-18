@@ -14,7 +14,6 @@ import pl.motooto.webapp.service.exception.SearchedFailedException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 public class SearchController {
@@ -39,7 +38,7 @@ public class SearchController {
     }
 
     @PostMapping("/search")
-    public RedirectView searchAdvertisments(@ModelAttribute(SEARCH_DTO) SearchDto searchDto, BindingResult result, HttpServletRequest request, Model model) {
+    public RedirectView searchAdvertisements(@ModelAttribute(SEARCH_DTO) SearchDto searchDto, BindingResult result, HttpServletRequest request, Model model) {
         RedirectView redirectView = new RedirectView();
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("search_options", searchDto);
