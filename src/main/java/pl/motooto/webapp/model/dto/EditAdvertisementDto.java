@@ -1,9 +1,9 @@
 package pl.motooto.webapp.model.dto;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import lombok.Data;
 
 @Data
 public class EditAdvertisementDto {
